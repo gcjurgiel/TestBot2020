@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.geometry.Translation2d;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -17,106 +15,109 @@ import edu.wpi.first.wpilibj.geometry.Translation2d;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {
-    public static final class DriveConstants {
-        // Motor Controller Constants
-        public static final int frontLeftPort = 4;
-        public static final int frontRightPort = 5;
-        public static final int rearLeftPort = 1;
-        public static final int rearRightPort = 2;
+public final class Constants { 
+    public static final class Drive {
+        public static final class Wheels {
+            public static final double diameter = 0.1524;
+            public static final double radius = diameter / 2;
+            public static final double circumfrence = diameter * Math.PI;
 
-        // Encoder Constants
-        public static final int unitsPerRotation = 4096;
-        public static final boolean encoderIsInverted = false;
+            public static final double maxVel = 0.0;
+            public static final double maxAcc = 0.0;
+            public static final double maxjerk = 0.0;
 
-        // Gyro Constnats
-        public static final boolean isGyroReversed = false;
+            public static final int unitsPerRotation = 4096;
+            public static final boolean encoderIsInverted = false;
 
-        // Initial Position
-        public static final double startPosLong = 5.0;
-        public static final double startPosShort = 13.5;
+            public static final class FrontLeft {
+                public static final int port = 4;
 
-        // Wheel Locations (meters)
-        public static final Translation2d frontLeft = new Translation2d(-0.381, 0.381);
-        public static final Translation2d frontRight = new Translation2d(0.381, 0.381);
-        public static final Translation2d rearLeft = new Translation2d(-0.381, -0.381);
-        public static final Translation2d rearRight = new Translation2d(0.381, -0.381);
-       
-        //Wheel Size (meters)
-        public static final double wheelDiameter = 0.1524; // 6in
-        public static final double wheelRadius = wheelDiameter / 2; // 3in, 0.076m 
-        public static final double wheelCircumfrence = wheelDiameter * Math.PI; // 18.85in, 0.48m 
+                public static final double x = -0.381;
+                public static final double y = 0.381;
 
-        // Maximums
-        public static final double maxWheelVel = 0.0;   // meters per second
+                public static final double p = 0.0;
+                public static final double i = 0.0;
+                public static final double d = 0.0;
+            }
 
-        public static final double maxVelForward = 3.73975;        // meters per second
-        public static final double maxAccForward = 0.0;        // meters per second squared
-        public static final double maxJerkForward = 0.0;       // meters per second cubed
+            public static final class FrontRight {
+                public static final int port = 5;
 
-        public static final double maxVelSideways = 1.8770752;
-        public static final double maxVelRot = 424.98776;
+                public static final double x = 0.381;
+                public static final double y = 0.381;
 
-        // Gains
-        public static final double ks = 0.0;
-        public static final double kv = 0.0;
-        public static final double ka = 0.0;
-    }
+                public static final double p = 0.0;
+                public static final double i = 0.0;
+                public static final double d = 0.0;
+            }
 
-    public static final class PIDConstants {
-        public static final class ChassePIDConstants {
+            public static final class RearLeft {
+                public static final int port = 1;
+                
+                public static final double x = -0.381;
+                public static final double y = -0.381;
+
+                public static final double p = 0.0;
+                public static final double i = 0.0;
+                public static final double d = 0.0;
+            }
+
+            public static final class RearRight {
+                public static final int port = 2;
+                
+                public static final double x = 0.381;
+                public static final double y = -0.381;
+
+                public static final double p = 0.0;
+                public static final double i = 0.0;
+                public static final double d = 0.0;
+            }
+        }
+        public static final class Robot {
+            public static final boolean isGyroReversed = false;
+
             public static final class X {
                 public static final double p = 0.0;
                 public static final double i = 0.0;
                 public static final double d = 0.0;
-                public static final double period = 0.02;
+                
+                public static final double maxVel = 3.73975;
+                public static final double maxAcc = 0.0;
+                public static final double maxJerk = 0.0;
+
+                public static final double startPos = 5.0;
             }
+
             public static final class Y {
                 public static final double p = 0.0;
                 public static final double i = 0.0;
-                public static final double d = 0.0;
-                public static final double period = 0.02;
+                public static final double d = 0.0;  
+                
+                public static final double maxVel = 1.8770752;
+                public static final double maxAcc = 0.0;
+                public static final double maxJerk = 0.0;
+
+                public static final double startPos = 13.5;
             }
+
             public static final class Theta {
                 public static final double p = 0.0;
                 public static final double i = 0.0;
-                public static final double d = 0.0;
-                public static final double period = 0.02;
-                public static final double maxAcc = 0.0;
-                public static final double maxVel = 0.0;
-            }
-        }
-        public static final class MotorPIDConstants {
-            public static final class FrontLeft {
-                public static final double p = 0.0;
-                public static final double i = 0.0;
-                public static final double d = 0.0;
-                public static final double period = 0.02;
-            }
-            public static final class FrontRight {
-                public static final double p = 0.0;
-                public static final double i = 0.0;
-                public static final double d = 0.0;
-                public static final double period = 0.02;
-            }
-            public static final class RearLeft {
-                public static final double p = 0.0;
-                public static final double i = 0.0;
-                public static final double d = 0.0;
-                public static final double period = 0.02;
-            }
-            public static final class RearRight {
-                public static final double p = 0.0;
-                public static final double i = 0.0;
-                public static final double d = 0.0;
-                public static final double period = 0.02;
-            }
-        }
+                public static final double d = 0.0; 
 
+                public static final double maxVel = 424.98776;
+                public static final double maxAcc = 0.0;
+                public static final double maxJerk = 0.0;
+            }
+        }
     }
-    public static final class OIConstants {
-        //Input Ports
-        public static final int xboxControllerPort = -1;
-        public static final int joyStickPort = 1;
+
+    public static final class Controller {
+        public static final class Joystick {
+            public static final int port = 1;
+        }
+        public static final class XboxController {
+            public static final int port = -1;
+        }
     }
 }

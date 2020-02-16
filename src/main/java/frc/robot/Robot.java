@@ -18,9 +18,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command driveCartesianCommand;
-
   private RobotContainer robotContainer;
+
+  //Commands
+  private Command driveCartesianCommand;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -55,7 +56,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     if (driveCartesianCommand != null) {
-      driveCartesianCommand.schedule();
+      driveCartesianCommand.cancel();;
     }
   }
 
@@ -68,6 +69,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    if (driveCartesianCommand != null) {
+      driveCartesianCommand.cancel();;
+    }
   }
 
   /**

@@ -7,13 +7,13 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.Controller;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class JoystickSubsystem extends SubsystemBase {
 
-  private static Joystick stick = new Joystick(OIConstants.joyStickPort);
+  private static Joystick stick = new Joystick(Controller.Joystick.port);
 
   public JoystickSubsystem() {
   }
