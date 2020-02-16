@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveSubsytem;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.JoystickSubsystem;
 
 public class DriveCartesianCommand extends CommandBase {
@@ -16,10 +16,10 @@ public class DriveCartesianCommand extends CommandBase {
    * Creates a new DriveCartesianCommand.
    */
 
-  DriveSubsytem driveSubsystem;
+  DriveSubsystem driveSubsystem;
   JoystickSubsystem joystickSubsystem;
 
-  public DriveCartesianCommand(DriveSubsytem drive, JoystickSubsystem joystick) {
+  public DriveCartesianCommand(DriveSubsystem drive, JoystickSubsystem joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
     driveSubsystem = drive;
     joystickSubsystem = joystick;

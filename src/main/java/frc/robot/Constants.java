@@ -105,6 +105,9 @@ public final class Constants {
                 public static final double i = 0.0;
                 public static final double d = 0.0; 
 
+                public static final double poseTolerance = 0.0;
+                public static final double velTolerance = 0.0;
+
                 public static final double maxVel = 424.98776;
                 public static final double maxAcc = 0.0;
                 public static final double maxJerk = 0.0;

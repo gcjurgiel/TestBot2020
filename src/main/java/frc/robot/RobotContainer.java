@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
@@ -21,10 +20,11 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveSubsytem driveSubsystem = new DriveSubsytem();
-  private final JoystickSubsystem joystickSubsystem = new JoystickSubsystem();
+  private static final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  private static final JoystickSubsystem joystickSubsystem = new JoystickSubsystem();
 
-  private final DriveCartesianCommand driveCartesianCommand = new DriveCartesianCommand(driveSubsystem, joystickSubsystem);
+  private static final DriveCartesianCommand driveCartesianCommand = new DriveCartesianCommand(driveSubsystem, joystickSubsystem);
+  private static final DriveStraightCommand driveStrightCommand = new DriveStraightCommand(driveSubsystem, joystickSubsystem);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -41,6 +41,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    joystickSubsystem.getButton(1).whileActiveContinuous(driveStrightCommand).cancelWhenActive(driveCartesianCommand);
   }
 
   public Command getDriveCartesianCommand() {

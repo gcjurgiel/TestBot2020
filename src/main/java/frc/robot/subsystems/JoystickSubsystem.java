@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import frc.robot.Constants.Controller;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class JoystickSubsystem extends SubsystemBase {
 
@@ -40,6 +41,10 @@ public class JoystickSubsystem extends SubsystemBase {
 
   public double getRawTwist() {
     return stick.getTwist();
+  }
+
+  public JoystickButton getButton(int button) {
+    return new JoystickButton(stick, button);
   }
 
   public Joystick getJoystick() {
