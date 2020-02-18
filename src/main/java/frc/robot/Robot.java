@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     if (driveCartesianCommand != null) {
-      driveCartesianCommand.cancel();;
+      driveCartesianCommand.cancel();
     }
   }
 
@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
     driveCartesianCommand = robotContainer.getDriveCartesianCommand();
 
     if (driveCartesianCommand != null) {
-      driveCartesianCommand.schedule();
+      // driveCartesianCommand.schedule();
     }
   }
 

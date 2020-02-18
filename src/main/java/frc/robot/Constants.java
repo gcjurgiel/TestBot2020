@@ -29,6 +29,10 @@ public final class Constants {
             public static final int unitsPerRotation = 4096;
             public static final boolean encoderIsInverted = false;
 
+            public static final double p = 0.0;
+            public static final double i = 0.0;
+            public static final double d = 0.0;
+
             public static final class FrontLeft {
                 public static final int port = 4;
 
@@ -101,12 +105,12 @@ public final class Constants {
             }
 
             public static final class Theta {
-                public static final double p = 0.0;
+                public static final double p = 1.5;
                 public static final double i = 0.0;
-                public static final double d = 0.0; 
+                public static final double d = 0.05; 
 
-                public static final double poseTolerance = 0.0;
-                public static final double velTolerance = 0.0;
+                public static final double poseTolerance = 2.0;
+                public static final double velTolerance = 0.05;
 
                 public static final double maxVel = 424.98776;
                 public static final double maxAcc = 0.0;
@@ -122,5 +126,10 @@ public final class Constants {
         public static final class XboxController {
             public static final int port = -1;
         }
+    }
+
+    public static final class Vision {
+        public static final String host = "10.43.30.20";
+        public static final int port = 9001;
     }
 }

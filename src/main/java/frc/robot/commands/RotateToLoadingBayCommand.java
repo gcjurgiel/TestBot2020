@@ -7,54 +7,61 @@
 
 package frc.robot.commands;
 
+import java.io.IOException;
+
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.Drive.Robot.Theta;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.JoystickSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 
-public class DriveStraightCommand extends CommandBase {
+public class RotateToLoadingBayCommand extends CommandBase {
   private DriveSubsystem driveSubsystem;
-  private JoystickSubsystem joystickSubsytem;
+  private VisionSubsystem visionSubsystem;
   private PIDController controller;
-  private double setPoint = 0.0;
 
-  public DriveStraightCommand(DriveSubsystem drive, JoystickSubsystem stick) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public RotateToLoadingBayCommand(DriveSubsystem drive, VisionSubsystem vision) {
     driveSubsystem = drive;
-    joystickSubsytem = stick;
+    visionSubsystem = vision;
     controller = drive.getRobotThetaPID();
     controller.enableContinuousInput(-180, 180);
     controller.setTolerance(Theta.poseTolerance, Theta.velTolerance);
-
-    addRequirements(drive, stick);
+    addRequirements(drive, vision);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    setPoint = driveSubsystem.getHeading();
+    try {
+      visionSubsystem.startUp();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double output = controller.calculate(driveSubsystem.getHeading(), setPoint);
-    driveSubsystem.driveCartesian(-joystickSubsytem.getY(), joystickSubsytem.getX(), output / 180 + joystickSubsytem.getTwist());
-
-    if(Math.abs(joystickSubsytem.getTwist()) > 0) {
-      setPoint = driveSubsystem.getHeading();
-    }
+    double output = controller.calculate(visionSubsystem.getLoadingBayBearing(), 0.0);
+    driveSubsystem.driveCartesian(0.0, 0.0, output / 51.43);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    try {
+      visionSubsystem.shutDown();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    driveSubsystem.driveCartesian(0.0, 0.0, 0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return controller.atSetpoint();
   }
 }

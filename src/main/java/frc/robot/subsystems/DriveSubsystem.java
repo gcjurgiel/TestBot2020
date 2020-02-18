@@ -59,7 +59,10 @@ public class DriveSubsystem extends SubsystemBase {
     gyro.reset();
   }
   public double getHeading() {
-    return Math.IEEEremainder(gyro.getAngle(), 360) * (Robot.isGyroReversed ? -1.0 : 1.0);
+    return gyro.getAngle();
+  }
+  public double getHeadingZeroToOne() {
+    return gyro.getAngle() / 180.0;
   }
   public double getTurnRate() {
     return gyro.getRate() * (Robot.isGyroReversed ? -1.0 : 1.0);
