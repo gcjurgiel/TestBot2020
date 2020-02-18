@@ -84,7 +84,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     driveCartesianCommand = robotContainer.getDriveCartesianCommand();
-
     if (driveCartesianCommand != null) {
       // driveCartesianCommand.schedule();
     }

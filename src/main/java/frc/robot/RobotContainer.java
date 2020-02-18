@@ -32,8 +32,7 @@ public class RobotContainer {
   private static final DriveCartesianCommand driveCartesianCommand = new DriveCartesianCommand(driveSubsystem, joystickSubsystem);
   private static final DriveStraightCommand driveStrightCommand = new DriveStraightCommand(driveSubsystem, joystickSubsystem);
   private static final RotateToCommand rotateToCommand = new RotateToCommand(90, driveSubsystem);
-  private static final RotateToLoadingBayCommand rotateToLoadingBayCommand = new RotateToLoadingBayCommand(
-      driveSubsystem, visionSubsystem);
+  private static final RotateToLoadingBayCommand rotateToLoadingBayCommand = new RotateToLoadingBayCommand(driveSubsystem, visionSubsystem, joystickSubsystem);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -54,33 +53,42 @@ public class RobotContainer {
     // .whileActiveContinuous(driveStrightCommand)
     // .whenInactive(driveCartesianCommand);
 
-    joystickSubsystem.getButton(11).whenPressed(() -> {
-      try {
-System.out.println("Trying Connection...");
-        visionSubsystem.startUp();
-      } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    });
+    // joystickSubsystem.getButton(11).whenPressed(() -> {
+    //   startVision();
+    // });
 
-    joystickSubsystem.getButton(1).whenPressed(() -> {
-      System.out.println(visionSubsystem.getLoadingBayBearing());
-    });
+    // joystickSubsystem.getButton(1)
+    // .whenPressed(rotateToLoadingBayCommand)
+    // .whenReleased(() -> { rotateToLoadingBayCommand.cancel(); });
 
-    joystickSubsystem.getButton(12).whenPressed(() -> {
-      try {
-        visionSubsystem.shutDown();
-      } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    });
+    // joystickSubsystem.getButton(12).whenPressed(() -> {
+    //   stopVision();
+    // });
 
-    joystickSubsystem.getButton(9).whenPressed(rotateToLoadingBayCommand);
+    joystickSubsystem.getButton(1)
+    .whenPressed(rotateToCommand)
+    .whenReleased(() -> { rotateToCommand.cancel(); });
   }
 
   public Command getDriveCartesianCommand() {
     return driveCartesianCommand;
+  }
+
+  public void startVision() {
+    try {
+      visionSubsystem.startUp();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
+
+  public void stopVision() {
+    try {
+      visionSubsystem.shutDown();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 }

@@ -228,7 +228,6 @@ public class VisionSubsystem extends SubsystemBase {
 
     if (active) {
       Map<String, Double> data = retrieveData();
-      System.out.println(data);
     try {
         if (data.get("pprb") != null) {
           powerPortBearing = data.get("pprb");
